@@ -70,4 +70,9 @@ public class LoginSvcSIOImpl implements ILoginSvc {
     public Login delete(Login login) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Login update(Login login) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

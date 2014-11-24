@@ -8,6 +8,7 @@ package services;
 import domain.Bill;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -28,38 +29,71 @@ public class BillSvcJDBCImpl implements IBillSvc {
 
     @Override
     public Bill create(Bill bill) throws ServiceException {
-        try {
-            Connection connection = getConnection();
-            Statement statement = connection.createStatement();
-            //Construct the SQL string
-            String sql = "INSERT INTO bill (name, amount, dueDate) VALUES ('" + bill.getName() + "', '" + bill.getAmount() + "', '" + bill.getDueDate() + "')";
-            //Fetches and assigns id    
-            statement.executeUpdate(sql);
-            sql = "SELECT last_insert_id()";
-            ResultSet rs = statement.executeQuery(sql);
+        String sql = "INSERT INTO bill (name, amount, dueDate) VALUES (?,?,?)";
+        String sql2 = "SELECT last_insert_id()";
+        try (Connection connection = getConnection();) {
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1, bill.getName());
+            pstmt.setInt(2, bill.getAmount());
+            pstmt.setString(3, bill.getDueDate());
+            pstmt.executeUpdate();
+            PreparedStatement pstmt2 = connection.prepareStatement(sql2);
+            ResultSet rs = pstmt2.executeQuery(sql2);
             if (rs.next()) {
                 bill.setId(rs.getInt("last_insert_id()"));
             }
-            connection.close();
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            System.out.println("BillPStmtSvcImpl.create EXCEPTION: " + e.getMessage());
         }
         return bill;
     }
 
     @Override
     public Bill retrieve(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Bill bill = null;
+        String sql = "SELECT * FROM bill WHERE id=?";
+        try (Connection connection = getConnection();
+                PreparedStatement pstmt = connection.prepareStatement(sql);) {
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                bill = new Bill();
+                bill.setId(rs.getInt("id"));
+                bill.setName(rs.getString("name"));
+            }
+        } catch (Exception e) {
+            System.out.println("BillPStmtSvcImpl.retrieve EXCEPTION: " + e.getMessage());
+        }
+        return bill;
     }
 
     @Override
     public Bill update(Bill bill) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "UPDATE bill SET name= ?, amount= ?, dueDate= ? WHERE id=?";
+        try (Connection connection = getConnection();) {
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1, bill.getName());
+            pstmt.setInt(2, bill.getAmount());
+            pstmt.setString(3, bill.getDueDate());
+            pstmt.setInt(4, bill.getId());
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("BillPStmtSvcImpl.update EXCEPTION: " + e.getMessage());
+        }
+        return bill;
     }
 
     @Override
     public Bill delete(Bill bill) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "DELETE FROM bill WHERE id=?";
+        try (Connection connection = getConnection();) {
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setInt(1, bill.getId());
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("BillPStmtSvcImpl.delete EXCEPTION: " + e.getMessage());
+        }
+        return bill;
     }
 
     @Override

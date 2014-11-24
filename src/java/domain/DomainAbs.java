@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package domain;
 
 /**
  *
  * @author Steven
  */
-public abstract class DomainAbs {
+public abstract class DomainAbs implements java.io.Serializable {
 
     protected int id;
 
@@ -31,5 +30,3 @@ public abstract class DomainAbs {
         }
     }
 }
-
-  

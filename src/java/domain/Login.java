@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package domain;
 
 /**
@@ -30,34 +29,35 @@ public class Login extends DomainAbs {
     public void setUsername(String username) {
         this.username = username;
     }
-        public boolean validate () {
+
+    public boolean validate() {
         if (!(super.validate())) {
             return false;
         }
         if (username == null) {
             return false;
-        }  
+        }
         if (password == null) {
             return false;
         }
         return true;
     }
-    
+
     @Override
-    public boolean equals (Object obj) {
-        if (this==obj) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if(!(obj instanceof Login)) {
+        if (!(obj instanceof Login)) {
             return false;
         }
-        Login login = (Login)obj;
-        if(login.id != id) {
+        Login login = (Login) obj;
+        if (login.id != id) {
             return false;
         }
-        if(login.username != username){
+        if (login.username != username) {
             return false;
         }
         return true;
-    }  
+    }
 }

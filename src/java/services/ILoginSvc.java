@@ -19,6 +19,8 @@ interface ILoginSvc extends IService {
     public Login store(Login login) throws ServiceException;
 
     public Login retrieve(int id);
+    
+    public Login update(Login login);
 
     public ArrayList<Login> retrieve(String lastName);
 

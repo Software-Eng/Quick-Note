@@ -19,6 +19,8 @@ public interface IAccountSvc extends IService {
     public Account store(Account account) throws ServiceException;
 
     public Account retrieve(int id);
+    
+    public Account update(Account account);
 
     public ArrayList<Account> retrieve(String lastName);
 

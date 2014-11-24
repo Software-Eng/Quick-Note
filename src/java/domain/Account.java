@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package domain;
 
 /**
  *
  * @author Steven
  */
-public class Account extends DomainAbs{
+public class Account extends DomainAbs {
+
     private Login login;
     private Bill bill;
     private Address address;
@@ -81,6 +81,10 @@ public class Account extends DomainAbs{
         return lastName;
     }
 
+    public String getName() {
+        return firstName + " " + lastName;
+    }
+
     /**
      * @param lastName the lastName to set
      */
@@ -101,8 +105,8 @@ public class Account extends DomainAbs{
     public void setEmail(String email) {
         this.email = email;
     }
-    
-        @Override
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -132,19 +136,27 @@ public class Account extends DomainAbs{
         if (lastName == null || lastName.equals("")) {
             return false;
         }
-        
+
         if (email == null || email.equals("")) {
             return false;
         }
-        if (login == null){
+        if (login == null) {
             return false;
         }
-        if (address == null){
+        if (address == null) {
             return false;
         }
-        if (bill == null){
+        if (bill == null) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        if ("null null".equals(getName())) {
+            return null;
+        }
+        return getName();
     }
 }

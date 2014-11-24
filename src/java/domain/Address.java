@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package domain;
 
 /**
  *
  * @author Steven
  */
-public class Address extends DomainAbs{
+public class Address extends DomainAbs {
+
     private String zip;
     private String address;
     private String city;
@@ -85,8 +85,8 @@ public class Address extends DomainAbs{
     public void setApartmentNumber(int apartmentNumber) {
         this.apartmentNumber = apartmentNumber;
     }
-    
-        @Override
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -113,16 +113,16 @@ public class Address extends DomainAbs{
         if (address == null || address.equals("")) {
             return false;
         }
-        if( city == null || city.equals("")){
+        if (city == null || city.equals("")) {
             return false;
         }
-        if (zip == null || zip.equals("")){
-        return false;
+        if (zip == null || zip.equals("")) {
+            return false;
         }
-        if (apartmentNumber == 0){
+        if (apartmentNumber == 0) {
             return false;
         }
         return true;
     }
-    
+
 }

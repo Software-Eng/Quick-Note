@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package domain;
 
 /**
@@ -11,9 +10,10 @@ package domain;
  * @author Steven
  */
 public class Bill extends DomainAbs {
+
     private String name;
     private int amount;
-    private String dueDate; 
+    private String dueDate;
 
     public Bill() {
         id = 0;
@@ -32,7 +32,8 @@ public class Bill extends DomainAbs {
     public String getName() {
         return name;
     }
-       /**
+
+    /**
      * @return the amount
      */
     public int getAmount() {
@@ -88,7 +89,7 @@ public class Bill extends DomainAbs {
             return false;
 
         }
-        if (amount == 0){
+        if (amount == 0) {
             return false;
         }
         if (dueDate == null || dueDate.equals("")) {
@@ -101,6 +102,5 @@ public class Bill extends DomainAbs {
     public String toString() {
         return name;
     }
-
 
 }

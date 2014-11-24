@@ -67,4 +67,9 @@ public class AccountSvcSIOImpl implements IAccountSvc {
     public ArrayList<Account> retrieve(String lastName) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Account update(Account account) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

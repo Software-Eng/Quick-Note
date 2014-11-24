@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package domain;
 
 import org.junit.After;
@@ -18,7 +17,7 @@ import static org.junit.Assert.*;
  * @author Steven
  */
 public class LoginTest {
-    
+
     @Test
     public void testEquals() {
         Login login = new Login();
@@ -36,6 +35,7 @@ public class LoginTest {
         assertFalse(login.equals(login2));
         System.out.println("testEquals passed!");
     }
+
     @Test
     public void testValidate() {
         Login login = new Login();
@@ -49,5 +49,5 @@ public class LoginTest {
         assertFalse("expected false", login.validate());
         System.out.println("testValidate() passed!");
     }
-    
+
 }
