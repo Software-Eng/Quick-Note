@@ -35,10 +35,11 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         System.out.println("username/password: " + username + "/" + password);
-        response.setContentType("text/html;charset=UTF-8");
+        //response.setContentType("text/html;charset=UTF-8");
         Login login = new Login();
         login.setUsername(username);
         login.setPassword(password);
+        getServletContext().getRequestDispatcher("/home.jsp").forward(request,response);
         if(login.validate());
             //pass login to login manager, then display home page
             //}else{... } //redirect to login page
@@ -53,8 +54,9 @@ public class LoginServlet extends HttpServlet {
             out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-            //getServletContext().getRequestDispatcher("/home.jsp").forward(request.response);
+
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
